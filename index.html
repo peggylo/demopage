@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <i class="fa-solid fa-users-gear"></i>
+            <h1>用户管理系统</h1>
+        </div>
+        <nav>
+            <ul>
+                <li class="active"><a href="#"><i class="fa-solid fa-user-group"></i>用户管理</a></li>
+                <li><a href="#"><i class="fa-solid fa-chart-line"></i>统计数据</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i>系统设置</a></li>
+                <li><a href="#"><i class="fa-solid fa-circle-info"></i>帮助中心</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <div class="search-global">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="全局搜索...">
+            </div>
+            <div class="header-right">
+                <button class="theme-toggle"><i class="fa-solid fa-moon"></i></button>
+                <button class="notification-bell"><i class="fa-solid fa-bell"></i></button>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/36" alt="Profile">
+                    <span>管理员</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-header">
+            <div class="page-title">
+                <h2>用户列表</h2>
+                <p>管理系统中的所有用户账户</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn-secondary"><i class="fa-solid fa-download"></i> 导入</button>
+                <button class="btn-secondary"><i class="fa-solid fa-upload"></i> 导出</button>
+                <button class="btn-primary"><i class="fa-solid fa-plus"></i> 创建用户</button>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-item">
+                <input type="text" id="orgSearch" placeholder="组织">
+                <i class="fa-solid fa-filter"></i>
+            </div>
+            <div class="filter-item">
+                <input type="text" id="usernameSearch" placeholder="用户名/邮箱">
+                <i class="fa-solid fa-filter"></i>
+            </div>
+            <div class="filter-actions">
+                <button class="btn-outline"><i class="fa-solid fa-arrows-rotate"></i> 重置</button>
+                <button class="btn-outline"><i class="fa-solid fa-sliders"></i> 高级筛选</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="table-container">
+                <table id="userTable">
+                    <thead>
+                        <tr>
+                            <th>组织</th>
+                            <th>用户名</th>
+                            <th>邮箱</th>
+                            <th>角色</th>
+                            <th>状态</th>
+                            <th>Activation Time</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 表格数据将通过JavaScript动态生成 -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                <button class="pagination-button"><i class="fa-solid fa-angles-left"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-angle-left"></i></button>
+                <button class="pagination-button active">1</button>
+                <button class="pagination-button">2</button>
+                <button class="pagination-button">3</button>
+                <button class="pagination-button"><i class="fa-solid fa-angle-right"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-angles-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑用户弹窗 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>编辑用户</h2>
+                <button class="close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="editUserForm">
+                <div class="form-group">
+                    <label for="editOrg">组织 <span class="required">*</span></label>
+                    <input type="text" id="editOrg" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUsername">用户名 <span class="required">*</span></label>
+                    <input type="text" id="editUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">邮箱 <span class="required">*</span></label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPassword">密码</label>
+                    <div class="password-container">
+                        <input type="password" id="editPassword" value="******">
+                        <button type="button" class="toggle-password"><i class="fa-solid fa-eye-slash"></i></button>
+                    </div>
+                </div>
+                <div class="form-group date-time">
+                    <label>Activation Time</label>
+                    <div class="datetime-inputs">
+                        <input type="date" id="editDate">
+                        <div class="time-inputs">
+                            <div class="time-group">
+                                <label>小时</label>
+                                <input type="text" id="editHours" maxlength="2">
+                            </div>
+                            <div class="time-group">
+                                <label>分钟</label>
+                                <input type="text" id="editMinutes" maxlength="2">
+                            </div>
+                            <div class="time-group">
+                                <label>秒钟</label>
+                                <input type="text" id="editSeconds" maxlength="2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editStatus">状态 <span class="required">*</span></label>
+                    <div class="select-container">
+                        <select id="editStatus" required>
+                            <option value="Active">激活</option>
+                            <option value="Inactive">未激活</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editRoles">角色 <span class="required">*</span></label>
+                    <div class="select-container">
+                        <select id="editRoles" required>
+                            <option value="default">默认用户</option>
+                            <option value="admin">管理员</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editRateCount">访问限制次数 <span class="required">*</span></label>
+                    <input type="number" id="editRateCount" value="40" required>
+                </div>
+                <div class="form-group">
+                    <label for="editRateWindow">访问限制窗口 <span class="required">*</span></label>
+                    <input type="number" id="editRateWindow" value="10000" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-button">取消</button>
+                    <button type="submit" class="save-button">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
