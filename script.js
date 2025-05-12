@@ -166,10 +166,30 @@ function openEditModal(user) {
     cancelButton.addEventListener('click', closeEditModal);
     closeButton.addEventListener('click', closeEditModal);
     
+    // 清除之前的表單提交事件
+    const clonedForm = form.cloneNode(true);
+    form.parentNode.replaceChild(clonedForm, form);
+    
     // 添加表單提交事件
-    form.addEventListener('submit', function(e) {
+    clonedForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        // 在實際應用中，這裡會處理表單數據並更新用戶信息
+        
+        // 獲取當前正在編輯的用戶的 email
+        const userEmail = document.getElementById('editEmail').value;
+        
+        // 獲取新的角色值
+        const newRole = document.getElementById('editRoles').value;
+        
+        // 找到對應的用戶並更新角色
+        const userIndex = userData.findIndex(user => user.email === userEmail);
+        if (userIndex !== -1) {
+            userData[userIndex].roles = newRole;
+        }
+        
+        // 重新渲染表格
+        displayUsers();
+        
+        // 關閉模態窗口
         closeEditModal();
     });
 }
