@@ -32,7 +32,7 @@ body {
     min-height: 100vh;
 }
 
-/* 侧边栏样式 */
+/* 側邊欄樣式 */
 .sidebar {
     width: var(--sidebar-width);
     background-color: var(--surface);
@@ -98,7 +98,7 @@ nav ul li:not(.active) a:hover {
     color: var(--text-primary);
 }
 
-/* 主内容区域 */
+/* 主內容區域 */
 .main-content {
     flex: 1;
     margin-left: var(--sidebar-width);
@@ -107,7 +107,7 @@ nav ul li:not(.active) a:hover {
     flex-direction: column;
 }
 
-/* 顶部导航栏 */
+/* 頂部導航欄 */
 header {
     height: var(--header-height);
     background-color: var(--surface);
@@ -185,7 +185,7 @@ header {
     color: var(--text-primary);
 }
 
-/* 页面标题区域 */
+/* 頁面標題區域 */
 .page-header {
     padding: 24px;
     display: flex;
@@ -255,7 +255,7 @@ header {
     font-size: 16px;
 }
 
-/* 过滤条件栏 */
+/* 過濾條件欄 */
 .filter-bar {
     padding: 0 24px 16px;
     display: flex;
@@ -296,7 +296,7 @@ header {
     gap: 12px;
 }
 
-/* 卡片样式 */
+/* 卡片樣式 */
 .card {
     background: var(--surface);
     border-radius: var(--border-radius);
@@ -305,7 +305,7 @@ header {
     overflow: hidden;
 }
 
-/* 表格样式 */
+/* 表格樣式 */
 .table-container {
     overflow-x: auto;
 }
@@ -377,7 +377,7 @@ tbody tr:hover {
     background-color: rgba(176, 0, 32, 0.08);
 }
 
-/* 分页样式 */
+/* 分頁樣式 */
 .pagination {
     display: flex;
     justify-content: center;
@@ -410,7 +410,7 @@ tbody tr:hover {
     border-color: var(--primary-color);
 }
 
-/* 弹窗样式 */
+/* 彈窗樣式 */
 .modal {
     display: none;
     position: fixed;
@@ -577,7 +577,7 @@ tbody tr:hover {
     background-color: var(--primary-dark);
 }
 
-/* 响应式样式 */
+/* 響應式樣式 */
 @media (max-width: 992px) {
     .sidebar {
         width: 64px;

@@ -1,4 +1,4 @@
-// 模拟用户数据
+// 模擬用戶數據
 const userData = [
     {
         org: "school",
@@ -82,7 +82,7 @@ const userData = [
     }
 ];
 
-// 显示用户数据
+// 顯示用戶數據
 function displayUsers(users = userData) {
     const tableBody = document.querySelector('#userTable tbody');
     tableBody.innerHTML = '';
@@ -97,20 +97,20 @@ function displayUsers(users = userData) {
             <td><span class="status-badge ${user.status.toLowerCase()}">${user.status}</span></td>
             <td>${user.expiration}</td>
             <td class="action-cell">
-                <button class="edit-button" title="编辑"><i class="fa-solid fa-pen"></i></button>
+                <button class="edit-button" title="編輯"><i class="fa-solid fa-pen"></i></button>
                 <button class="refresh-user-button" title="刷新"><i class="fa-solid fa-rotate"></i></button>
-                <button class="delete-button" title="删除"><i class="fa-solid fa-trash"></i></button>
+                <button class="delete-button" title="刪除"><i class="fa-solid fa-trash"></i></button>
             </td>
         `;
         
-        // 为编辑按钮添加事件监听器
+        // 為編輯按鈕添加事件監聽器
         const editButton = row.querySelector('.edit-button');
         editButton.addEventListener('click', () => openEditModal(user));
         
         tableBody.appendChild(row);
     });
 
-    // 添加状态徽章样式
+    // 添加狀態徽章樣式
     const style = document.createElement('style');
     style.textContent = `
         .status-badge {
@@ -131,17 +131,17 @@ function displayUsers(users = userData) {
     document.head.appendChild(style);
 }
 
-// 打开编辑用户弹窗
+// 打開編輯用戶彈窗
 function openEditModal(user) {
     const modal = document.getElementById('editModal');
     const form = document.getElementById('editUserForm');
     
-    // 填充表单数据
+    // 填充表單數據
     document.getElementById('editOrg').value = user.org;
     document.getElementById('editUsername').value = user.username;
     document.getElementById('editEmail').value = user.email;
     
-    // 处理日期和时间
+    // 處理日期和時間
     const [date, time] = user.expiration.split(' ');
     const [year, month, day] = date.split('/');
     document.getElementById('editDate').value = `${year}-${month}-${day}`;
@@ -156,36 +156,36 @@ function openEditModal(user) {
     document.getElementById('editStatus').value = user.status;
     document.getElementById('editRoles').value = user.roles;
     
-    // 显示弹窗
+    // 顯示彈窗
     modal.style.display = 'flex';
     
-    // 添加关闭弹窗的事件
+    // 添加關閉彈窗的事件
     const cancelButton = modal.querySelector('.cancel-button');
     const closeButton = modal.querySelector('.close-button');
     
     cancelButton.addEventListener('click', closeEditModal);
     closeButton.addEventListener('click', closeEditModal);
     
-    // 添加表单提交事件
+    // 添加表單提交事件
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        // 在实际应用中，这里会处理表单数据并更新用户信息
+        // 在實際應用中，這裡會處理表單數據並更新用戶信息
         closeEditModal();
     });
 }
 
-// 关闭编辑用户弹窗
+// 關閉編輯用戶彈窗
 function closeEditModal() {
     const modal = document.getElementById('editModal');
     modal.style.display = 'none';
 }
 
-// 搜索功能
+// 搜尋功能
 function setupSearch() {
     const orgInput = document.getElementById('orgSearch');
     const usernameInput = document.getElementById('usernameSearch');
     
-    // Org搜索
+    // Org搜尋
     orgInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         const filteredUsers = userData.filter(user => 
@@ -194,7 +194,7 @@ function setupSearch() {
         displayUsers(filteredUsers);
     });
     
-    // Username/Email搜索
+    // Username/Email搜尋
     usernameInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         const filteredUsers = userData.filter(user => 
@@ -205,7 +205,7 @@ function setupSearch() {
     });
 }
 
-// 密码显示/隐藏切换
+// 密碼顯示/隱藏切換
 function setupPasswordToggle() {
     const toggleButton = document.querySelector('.toggle-password');
     const passwordInput = document.getElementById('editPassword');
@@ -214,14 +214,14 @@ function setupPasswordToggle() {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
         
-        // 切换图标
+        // 切換圖標
         this.innerHTML = type === 'password' ? 
             '<i class="fa-solid fa-eye-slash"></i>' : 
             '<i class="fa-solid fa-eye"></i>';
     });
 }
 
-// 点击其他区域关闭弹窗
+// 點擊其他區域關閉彈窗
 function setupModalOutsideClick() {
     const modal = document.getElementById('editModal');
     const modalContent = modal.querySelector('.modal-content');
@@ -232,17 +232,17 @@ function setupModalOutsideClick() {
         }
     });
     
-    // 防止点击模态框内容时关闭
+    // 防止點擊模態框內容時關閉
     modalContent.addEventListener('click', function(event) {
         event.stopPropagation();
     });
 }
 
-// 初始化主题切换
+// 初始化主題切換
 function setupThemeToggle() {
     const themeToggle = document.querySelector('.theme-toggle');
     themeToggle.addEventListener('click', function() {
-        // 这里只是切换图标，实际应用中会切换深色/浅色主题
+        // 這裡只是切換圖標，實際應用中會切換深色/淺色主題
         const icon = this.querySelector('i');
         if (icon.classList.contains('fa-moon')) {
             icon.classList.remove('fa-moon');
@@ -254,7 +254,7 @@ function setupThemeToggle() {
     });
 }
 
-// 初始化应用
+// 初始化應用
 function init() {
     displayUsers();
     setupSearch();
@@ -262,10 +262,10 @@ function init() {
     setupModalOutsideClick();
     setupThemeToggle();
     
-    // 添加创建用户按钮事件
+    // 添加創建用戶按鈕事件
     const createButton = document.querySelector('.btn-primary');
     createButton.addEventListener('click', function() {
-        // 创建空白用户对象
+        // 創建空白用戶對象
         const newUser = {
             org: "school",
             username: "",
@@ -278,5 +278,5 @@ function init() {
     });
 }
 
-// 当文档加载完成后初始化应用
+// 當文檔加載完成後初始化應用
 document.addEventListener('DOMContentLoaded', init); 
